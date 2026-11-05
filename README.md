@@ -2,8 +2,6 @@
 
 An Excel analysis of **3,044 Indian startup funding records (2 Jan 2015 – 13 Jan 2020)**. The workbook covers data cleaning, 7 PivotTables, 5 PivotCharts and an executive dashboard with KPI cards and written insights.
 
-![Dashboard preview](images/executive-dashboard.png)
-
 ## Project Objective
 Clean the raw startup funding data and summarise it in a dashboard that answers:
 - How much funding was reported in total, and how did it change year by year?
