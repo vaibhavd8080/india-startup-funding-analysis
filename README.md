@@ -1,98 +1,107 @@
 # India Startup Funding Analysis — Excel Dashboard
 
-An Excel analysis of **3,044 Indian startup funding records (2 Jan 2015 – 13 Jan 2020)**. The workbook covers data cleaning, 7 PivotTables, 5 PivotCharts and an executive dashboard with KPI cards and written insights.
+An end-to-end **Microsoft Excel** project analysing **3,044 Indian startup funding records** from 2 January 2015 to 13 January 2020. The workbook includes a documented cleaning process, PivotTables, PivotCharts and an executive dashboard.
+
+## Dashboard Preview
+
+![India Startup Funding Executive Dashboard](images/executive-dashboard.png)
 
 ## Project Objective
-Clean the raw startup funding data and summarise it in a dashboard that answers:
-- How much funding was reported in total, and how did it change year by year?
-- Which industries, cities and startups received the most funding?
-- How is funding split across investment types?
-- Which investor entries appear most often?
+
+Explore reported startup funding activity in India and answer:
+
+- How much funding was reported, and how did it change over time?
+- Which industries, cities and startups received the most reported funding?
+- How is funding distributed across investment types?
+- Which investor entries appear most frequently?
 
 ## Dataset
+
 - **Records:** 3,044 funding records
-- **Period:** 2 Jan 2015 – 13 Jan 2020
-- **Amounts:** reported in USD
-- **Source:** [(https://www.kaggle.com/datasets/sudalairajkumar/indian-startup-funding)]
+- **Period:** 2 January 2015 – 13 January 2020
+- **Currency:** USD
+- **Source:** [Indian Startup Funding Dataset — Kaggle](https://www.kaggle.com/datasets/sudalairajkumar/indian-startup-funding)
 
 ## Workbook Structure
+
 | Sheet | Purpose |
 |---|---|
-| `Raw_Data` | Original source data, left untouched |
-| `Cleaned_Data` | Cleaned dataset, plus two helper columns for the pivots |
-| `Pivot_Analysis` | 7 PivotTables that feed the dashboard |
-| `Executive_Dashboard` | KPI cards, 5 PivotCharts and key insights |
-| `Cleaning_Log` | Every cleaning decision |
+| `Raw_Data` | Original source data, preserved separately |
+| `Cleaned_Data` | Cleaned dataset and analysis helper columns |
+| `Pivot_Analysis` | Seven PivotTables used for analysis |
+| `Executive_Dashboard` | KPI cards, five PivotCharts and written insights |
+| `Cleaning_Log` | Documented data-cleaning decisions |
 | `Data_Dictionary` | Column definitions |
 
-## Data Cleaning
-All steps are documented in the `Cleaning_Log` sheet. No rows were removed and no values were imputed.
-- Standardised column headers; kept `Sr_No` as the source record identifier.
+## Data Preparation
+
+Cleaning decisions are documented in the workbook's `Cleaning_Log` sheet.
+
+- Standardised column headers and preserved `Sr_No` as the source record identifier.
 - Removed non-printing characters and normalised whitespace.
-- Parsed dates as DD/MM/YYYY and repaired eight malformed date strings.
-- Standardised formatting and case variants in `Investment_Type`, and selected formatting variants in `Industry_Vertical`.
-- Standardised clear city aliases (for example Bangalore → Bengaluru, Gurgaon → Gurugram).
+- Parsed dates and repaired eight malformed date strings.
+- Standardised selected investment type, industry and city labels.
 - Replaced missing categorical values with `Unknown`.
-- Converted `Amount_USD` to numeric by removing thousands separators; N/A, Unknown and Undisclosed amounts stay blank.
-- Kept the source "+" qualifier for one amount in a separate `Amount_USD_Qualifier` column.
-- Checked for duplicates: no duplicate `Sr_No` values and no exact duplicate rows. Repeated startup names are kept because they can be separate funding rounds.
+- Converted reported funding amounts to numeric values; unavailable amounts remain blank.
+- Preserved the source qualifier for one amount in a separate field.
+- Checked for duplicate identifiers and exact duplicate rows; repeated startup names were retained because they may represent separate funding rounds.
 
 ## Analysis
 
-### PivotTables (`Pivot_Analysis`)
-1. Total funding raised
+The workbook contains seven PivotTables:
+
+1. Total reported funding
 2. Year-wise funding
-3. Top 10 industries by total funding
-4. Top 10 cities by total funding
+3. Top 10 industries by reported funding
+4. Top 10 cities by reported funding
 5. Top 10 funded startups
-6. Funding distribution by investment type
-7. Top 10 most frequent investor entries
+6. Funding by investment type
+7. Most frequent investor entries
 
-### Dashboard (`Executive_Dashboard`)
-**KPI cards**
+The executive dashboard presents KPI cards and five PivotCharts for the main comparisons.
 
-| KPI | Value | How it is calculated |
-|---|---|---|
-| Total Funding | $38.14B | `GETPIVOTDATA`, linked to the Total Funding PivotTable |
-| Funding Records | 3,044 | `ROWS` on the cleaned data table |
-| Distinct Startup Names | 2,345 | `SUMPRODUCT` with `COUNTIF` (case-insensitive) |
-| Distinct Industry Labels | 792 | `SUMPRODUCT` with `COUNTIF` on `Industry_For_Analysis`, blanks excluded |
+## Key Findings
 
-**PivotCharts:** year-wise funding trend, top 10 industries, top 10 cities, top 10 funded startups, top 10 most frequent investor entries.
+1. **Bengaluru leads** with approximately $18.5B, or 48.5% of reported funding.
+2. **2017 was the peak year** at approximately $10.4B.
+3. **Private Equity represents about 70%** of reported funding (approximately $26.7B).
+4. The number of recorded deals declined after 2016, while the median reported deal size increased. Changes in reporting coverage may partly explain this pattern.
+5. **Flipkart is the top funded startup** in this dataset at approximately $4.06B.
 
-**Helper columns:** `Industry_For_Analysis` and `City_For_Analysis` copy the industry and city values and return blank when the value is `Unknown`, so Unknown is left out of the Top 10 pivots.
+## Data Limitations
 
-## Key Insights
-1. **Bengaluru leads** with $18.5B, 48.5% of reported funding. Bengaluru, Mumbai and Gurugram together hold 71.6%.
-2. **2017 was the peak year** at $10.4B (27%), followed by 2019 ($9.7B) and 2015 ($8.7B).
-3. **Private Equity accounts for about 70%** of reported funding ($26.7B). Series B is next at $4.8B.
-4. **Deal volume fell** from 993 records in 2016 to 111 in 2019, while the median reported deal size rose from $1M to $12M. Part of this may reflect changes in how deals were reported.
-5. **Flipkart is the top funded startup** at $4.06B.
+- **971 of 3,044 records (31.9%) have no reported amount.** Funding totals therefore describe only records with reported amounts.
+- The 2020 data ends on 13 January 2020; it is not a complete year.
+- The Rapido Bike Taxi $3.9B Series B entry appears unusual and may be a source-data error. It has been retained and affects related totals and rankings.
+- Startup name variants such as Flipkart and Flipkart.com were not merged.
 
-## Data Notes
-- 971 of 3,044 records (31.9%) have no reported amount, so funding totals cover about 68% of deals.
-- 2020 contains only 7 records (data ends 13 Jan 2020), so its low total is not a real decline.
-- Rapido Bike Taxi's $3.9B Series B record (Aug 2019) looks like a source-data error. It is included in the totals above and affects the 2019, Bengaluru, Series B and top-startup figures.
-- Startup names are counted case-insensitively; name variants such as Flipkart / Flipkart.com are not merged.
+## Tools & Skills
 
-## Skills Used
-Data cleaning in Excel, PivotTables and PivotCharts, `GETPIVOTDATA`, `SUMPRODUCT` / `COUNTIF`, helper columns, dashboard design, data documentation.
+Microsoft Excel, Power Query, PivotTables, PivotCharts, `GETPIVOTDATA`, `SUMPRODUCT`, `COUNTIF`, helper columns, dashboard design and data documentation.
 
 ## Repository Structure
-```
-india-startup-funding-excel-dashboard/
+
+```text
+india-startup-funding-analysis/
 ├── README.md
 ├── India_Startup_Funding_Dashboard.xlsx
-├── images/
-│   └── dashboard_preview.png
+├── data/
+│   └── startup_funding_raw.xlsx
 ├── docs/
 │   └── India_Startup_Funding_Dashboard.pdf
-└── data/
-    └── startup_funding_raw.csv
+└── images/
+    └── executive-dashboard.png
 ```
 
-## How to Open
-Download `India_Startup_Funding_Dashboard.xlsx` and open it in desktop Excel (PivotCharts do not display fully in browser previews). A PDF copy of the dashboard is in `docs/`.
+## Open the Project
+
+- [Download the Excel workbook](India_Startup_Funding_Dashboard.xlsx)
+- [View the dashboard PDF](docs/India_Startup_Funding_Dashboard.pdf)
+- [View the raw dataset file](data/startup_funding_raw.xlsx)
+
+Open the workbook in **Microsoft Excel desktop** for the full PivotTable and PivotChart experience. Browser previews may not display all workbook features.
 
 ## Author
-**Vaibhav Deshmukh** — [GitHub](https://github.com/vaibhavd8080)
+
+**Vaibhav Deshmukh**  
+[GitHub Profile](https://github.com/vaibhavd8080)
