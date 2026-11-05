@@ -15,7 +15,7 @@ Clean the raw startup funding data and summarise it in a dashboard that answers:
 - **Records:** 3,044 funding records
 - **Period:** 2 Jan 2015 – 13 Jan 2020
 - **Amounts:** reported in USD
-- **Source:** [add dataset source / link here]
+- **Source:** [(https://www.kaggle.com/datasets/sudalairajkumar/indian-startup-funding)]
 
 ## Workbook Structure
 | Sheet | Purpose |
@@ -30,7 +30,7 @@ Clean the raw startup funding data and summarise it in a dashboard that answers:
 ## Data Cleaning
 All steps are documented in the `Cleaning_Log` sheet. No rows were removed and no values were imputed.
 - Standardised column headers; kept `Sr_No` as the source record identifier.
-- Decoded UTF-8 byte escapes (apostrophes, accents, dashes, non-breaking spaces), removed non-printing characters and normalised whitespace.
+- Removed non-printing characters and normalised whitespace.
 - Parsed dates as DD/MM/YYYY and repaired eight malformed date strings.
 - Standardised formatting and case variants in `Investment_Type`, and selected formatting variants in `Industry_Vertical`.
 - Standardised clear city aliases (for example Bangalore → Bengaluru, Gurgaon → Gurugram).
